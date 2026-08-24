@@ -1,0 +1,18 @@
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Build files
+build/
+bin/
+
+# Java compiled files
+*.class
+
+# Eclipse workspace
+.metadata/
+
+# Logs and temporary files
+*.log
+*.tmp

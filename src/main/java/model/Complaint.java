@@ -1,0 +1,19 @@
+package model;
+
+public class Complaint {
+    private String name;
+    private String message;
+
+    public Complaint(String name, String message) {
+        this.name = name;
+        this.message = message;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
