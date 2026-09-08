@@ -5,6 +5,7 @@ RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
 # Copy JSP/HTML/CSS/JS files
 COPY WebContent /usr/local/tomcat/webapps/ROOT
+COPY src/main/java /app/src/main/java
 
 # Compile Java Servlet classes
 RUN mkdir -p /usr/local/tomcat/webapps/ROOT/WEB-INF/classes
@@ -12,7 +13,7 @@ RUN mkdir -p /usr/local/tomcat/webapps/ROOT/WEB-INF/classes
 RUN javac \
     -cp "/usr/local/tomcat/lib/*" \
     -d /usr/local/tomcat/webapps/ROOT/WEB-INF/classes \
-    $(find src/main/java -name "*.java")
+    $(find /app/src/main/java -name "*.java")
 
 # Start Tomcat
 EXPOSE 8080
