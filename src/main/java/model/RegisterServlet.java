@@ -30,28 +30,29 @@ public class RegisterServlet extends HttpServlet {
 
         try {
 
-            // Load MySQL driver
+            // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Database connection
+            // Database Connection
             con = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3307/testdb",
                     "root",
                     ""
             );
 
-            // SQL query
+            // SQL Query
             String sql = "INSERT INTO users(name, email) VALUES (?, ?)";
 
             ps = con.prepareStatement(sql);
 
+            // Set values
             ps.setString(1, name);
             ps.setString(2, email);
 
-            // Execute query
+            // Execute Query
             ps.executeUpdate();
 
-            // Send message to JSP
+            // Send success message to JSP
             request.setAttribute(
                     "message",
                     "Registration Successful!"
@@ -65,25 +66,32 @@ public class RegisterServlet extends HttpServlet {
 
             e.printStackTrace();
 
+            // Send error message to JSP
             request.setAttribute(
                     "message",
                     "Registration Failed: " + e.getMessage()
             );
 
+            // Forward to result.jsp
             request.getRequestDispatcher("result.jsp")
                    .forward(request, response);
 
         } finally {
 
+            // Close PreparedStatement
             try {
                 if (ps != null) {
                     ps.close();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+            // Close Connection
+            try {
                 if (con != null) {
                     con.close();
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
